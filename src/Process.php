@@ -12,6 +12,11 @@ abstract class Process {
   protected $ErrorMessage = null;
   protected $Signaled = false;
 
+  public function __construct(Bool $Autostart = false) {
+    if ($Autostart)
+      $this->start();
+  }
+
   public function start() {
     $this->update();
 
@@ -111,7 +116,7 @@ abstract class Process {
 
   public function getErrorMessage() {
     $this->update();
-    return $this->getErrorMessage;
+    return $this->ErrorMessage;
   }
 
   //override this to define the work to be done
