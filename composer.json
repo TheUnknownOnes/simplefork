@@ -1,0 +1,29 @@
+{
+    "name": "tuo/simplefork",
+    "description": "Classes to simply create child-process by pcntl_fork",
+    "keywords": [
+        "fork",
+        "async"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Benjamin Schwarze",
+            "email": "chaosben@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0"
+    },
+    "suggest": {
+        "ext-pcntl": "Required to use this lib",
+        "ext-posix": "Required to use this lib"
+    },
+    "autoload": {
+        "psr-4": {
+            "TUO\\SimpleFork\\": "src"
+        }
+    }
+}
