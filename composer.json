@@ -13,9 +13,8 @@
             "email": "chaosben@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php": "^7.0"
+        "php": "^7.1"
     },
     "suggest": {
         "ext-pcntl": "Required to use this lib",

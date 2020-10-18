@@ -6,7 +6,7 @@ abstract class Process {
   protected $Running = false;
   protected $Started = false;
   protected $ProcessID = null;
-  protected $TermSignale = null;
+  protected $TermSignal = null;
   protected $StopSignal = null;
   protected $ErrorCode = null;
   protected $ErrorMessage = null;
@@ -42,8 +42,8 @@ abstract class Process {
     }
     else {
       $this->ProcessID = getmypid();
-      $this->run();
-      exit(0);
+      $this->OnBeforeRun();
+      exit($this->run());
     }
   }
 
@@ -81,12 +81,16 @@ abstract class Process {
     }
   }
 
-  public function kill($Signal) {
+  public function signal($Signal = SIGHUP) {
     $this->update();
     if (! $this->Running)
       return true;
 
     return posix_kill($this->ProcessID, $Signal);
+  }
+
+  public function kill($Signal = SIGTERM) {
+    $this->signal($Signal);
   }
 
   public function wait($Sleeptime = 100000) {
@@ -119,8 +123,11 @@ abstract class Process {
     return $this->ErrorMessage;
   }
 
-  //override this to define the work to be done
-  abstract public function run();
+  protected function OnBeforeRun() {
+  }
+
+  //implement this to define the work to be done
+  abstract protected function run();
 }
 
 ?>
