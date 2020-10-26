@@ -13,11 +13,11 @@ abstract class AdvancedProcess extends Process {
     pcntl_signal(SIGHUP, [$this, 'OnSignalHangup']);
   }
 
-  protected function OnSignalHangup() {
+  public function OnSignalHangup() {
     //override this in your class
   }
 
-  protected function OnSignalTerminate() {
+  public function OnSignalTerminate() {
     //override this in your class
   }
 }
