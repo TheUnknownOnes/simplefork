@@ -84,7 +84,7 @@ abstract class Process {
   public function signal($Signal = SIGHUP) {
     $this->update();
     if (! $this->Running)
-      return true;
+      return false;
 
     return posix_kill($this->ProcessID, $Signal);
   }

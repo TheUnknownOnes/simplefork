@@ -14,10 +14,12 @@ class MyJob extends AdvancedProcess {
         break;
       sleep(1);
     }
-    return 0;
+    echo "[Child] Exiting" . PHP_EOL;
+    return 1;
   }
 
-  protected function OnSignalTerminate() {
+  public function OnSignalTerminate() {
+    echo "[Child] Got signal to terminate" . PHP_EOL;
     $this->Stopped = true;
   }
 }
@@ -28,9 +30,11 @@ $Job->start();
 
 sleep(1);
 
+echo "[Parent] Sending SIGTERM" . PHP_EOL;
 $Job->kill(SIGTERM);
+echo "[Parent] Waiting for job" . PHP_EOL;
 $Job->wait();
 
-echo "Job exited with code {$Job->getErrorCode()}" . PHP_EOL;
+echo "[Parent] Job exited with code {$Job->getErrorCode()}" . PHP_EOL;
 
 ?>
